@@ -1,0 +1,45 @@
+{{template "front/inc/header.html" .}}
+<div class="container">
+    <div class="line">
+        <div class="xl12 xs6 xs3-move">
+            <div class="search-box text-center">
+                <h2><a href="http://bt.fullstackdev.cn">bt.fullstackdev.cn</a></h2>
+                <br>
+                <br>
+                <br>
+
+                <form action="/list.html" class="form-inline padding-bottom" method="get">
+                    <div class="form-group">
+                        <div class="field">
+                            <div class="input-group">
+                                <input type="text" class="input" size="50" name="keywords"
+                                       placeholder="输入关键字,在{{.filteredCount}}个资源中搜索">
+                        <span class="addbtn">
+                            <button type="submit" class="button bg-main icon-search"></button>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+               <!-- <div class="hot-res text-left">
+                    <ul class="list-inline">
+                        <li><h4><span class="tag bg-red">热门资源:</span></h4></li>
+                        {{range .hots}}
+                        <li>
+                            <a href="/view/{{.Id}}.html" title="{{.Name}}" class="text-small">
+                                {{if le (.Name|len) 7}}
+                                {{.Name}}
+                                {{else}}
+                                {{substr .Name 0 7}}
+                                {{end}}
+                            </a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+{{template "front/inc/footer.html" .}}

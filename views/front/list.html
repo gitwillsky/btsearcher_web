@@ -1,0 +1,88 @@
+{{template "front/inc/header.html" .}}
+<div class="searcher-bar">
+    <div class="container">
+        <div class="line padding-top padding-bottom">
+            <div class="hidden-l xs3">
+                <h3 class="text-center">
+                    <a href="http://bt.fullstackdev.cn" class="text-black">bt.fullstackdev.cn</a>
+                </h3>
+            </div>
+            <div class="xl12 xs6 text-center">
+                <form action="/list.html" class="form-inline" method="get">
+                    <div class="form-group">
+                        <div class="field">
+                            <div class="input-group">
+                                <input type="text" class="input" size="50" name="keywords" placeholder="请输入关键字">
+                        <span class="addbtn">
+                            <button type="submit" class="button bg-main icon-search"></button>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding:67px 0 67px 0;">
+    <div class="line">
+        <div class="xl12 xs8 xs2-move">
+            {{if .torrents}}
+            <p class="text-gray text-small">找到 {{.count}} 条结果</p>
+            {{range .torrents}}
+            <div class="margin-big-bottom bg-white padding border border-small border-dotted list-element">
+                <h3 style="word-break:break-all;word-wrap:break-word;">
+                    {{if le (.Name|len) 70}}
+                    <a href="/view/{{.Id}}.html">{{.Name}}</a>
+                    {{else}}
+                    <a href="/view/{{.Id}}.html">{{substr .Name 0 70}}...</a>
+                    {{end}}
+                </h3>
+
+                <p>
+                    <span class="badge bg-main margin-right">大小: {{.FileLen | size}}</span>
+                    <span class="badge bg-sub margin-right">文件数: {{.FileCount}}</span>
+                    <span class="badge bg-yellow margin-right">下载数: {{.Hot}}</span>
+                    <span class="badge bg-info margin-right">添加时间: {{date .CreateAt "Y-m-d"}}</span>
+
+                    {{if .FileList}}
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <th>文件名</th>
+                            <th>大小</th>
+                            <th>MD5</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{range .FileList}}
+                        <tr>
+                            <td>{{.Name}}</td>
+                            <td>{{.Length | size}}</td>
+                            <td>{{.Md5}}</td>
+                        </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+
+                {{end}}
+            </div>
+            {{end}}
+            <!--box end-->
+            {{template "front/inc/paginator.html" .}}
+            {{else}}
+            <div class="panel">
+                <div class="panel-body">
+                    <p>未找到任何信息!</p>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+</div>
+
+{{template "front/inc/footer.html" .}}
